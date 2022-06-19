@@ -2,6 +2,7 @@ const path = require("path")
 // 引入自动生成 html 的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {VueLoaderPlugin}=require('vue-loader')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode:'production',
     entry: "./src/main.js", // 入口
@@ -13,7 +14,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'public/index.html')
           }),
-        new VueLoaderPlugin() 
+        new  VueLoaderPlugin() ,
+        new MiniCssExtractPlugin()
     ],
     devServer: {
         port: 3000, // 端口号
@@ -66,7 +68,11 @@ module.exports = {
           {
             test: /\.vue/i,
             use: ['vue-loader']
-          }
+          },
+          {
+            test: /\.css$/i,
+            use: [MiniCssExtractPlugin.loader, "css-loader"],
+          },
         ]
     }
 }
