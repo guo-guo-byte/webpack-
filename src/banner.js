@@ -1,0 +1,1 @@
+export const banner = () => console.log('实现一标签页')
